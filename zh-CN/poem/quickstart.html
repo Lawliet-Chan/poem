@@ -172,8 +172,7 @@ async fn index(Query(Params { name, value }): Query&lt;Params&gt;) -&gt; String 
 #[tokio::main]
 async fn main() {
     let listener = TcpListener::bind(&quot;127.0.0.1:3000&quot;);
-    let server = Server::new(listener).await.unwrap();
-    server.run(index).await.unwrap();
+    Server::new(listener).run(index).await.unwrap();
 }
 </code></pre></pre>
 <p>这样，一个简单的例子就实现了，我们可以运行它，然后使用 <code>curl</code> 做一些测试。</p>

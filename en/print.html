@@ -172,7 +172,7 @@ async fn index(Query(Params { name, value }): Query&lt;Params&gt;) -&gt; String 
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="server-http-server"><a class="header" href="#server-http-server">Server HTTP server</a></h2>
+<h2 id="http-server"><a class="header" href="#http-server">HTTP server</a></h2>
 <p>Let's start a server, it listens to <code>127.0.0.1:3000</code>, please ignore these <code>unwrap</code> calls, this is just an example.</p>
 <p>The <code>Server::run</code> function accepts any type that implements the <code>Endpoint</code> trait. In this example we don't have a 
 routing object, so any request path will be handled by the <code>index</code> function.</p>
@@ -180,8 +180,7 @@ routing object, so any request path will be handled by the <code>index</code> fu
 #[tokio::main]
 async fn main() {
     let listener = TcpListener::bind(&quot;127.0.0.1:3000&quot;);
-    let server = Server::new(listener).await.unwrap();
-    server.run(index).await.unwrap();
+    Server::new(listener).run(index).await.unwrap();
 }
 </code></pre></pre>
 <p>In this way, a simple example is implemented, we can run it and then use <code>curl</code> to do some tests.</p>
@@ -373,11 +372,11 @@ fails.</p>
 <p>Extracts the <code>Request</code> from the incoming request.</p>
 </li>
 <li>
-<p><strong>RemoteAddr</strong></p>
+<p><strong>&amp;RemoteAddr</strong></p>
 <p>Extracts the remote peer's address [<code>RemoteAddr</code>] from request.</p>
 </li>
 <li>
-<p><strong>LocalAddr</strong></p>
+<p><strong>&amp;LocalAddr</strong></p>
 <p>Extracts the local server's address [<code>LocalAddr</code>] from request.</p>
 </li>
 <li>
